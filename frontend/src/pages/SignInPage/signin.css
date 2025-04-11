@@ -1,0 +1,14 @@
+/* Контейнер занимает всю доступную высоту и ширину */
+.container {
+    display: flex;
+    justify-content: center;  /* Центрируем по горизонтали */
+    align-items: center;      /* Центрируем по вертикали */
+    height: 100vh;            /* Занимает всю высоту окна */
+}
+
+/* Это сам элемент, который нужно центрировать */
+.centered {
+    background-color: lightblue;
+    padding: 20px;
+    border: 1px solid #ccc;
+}

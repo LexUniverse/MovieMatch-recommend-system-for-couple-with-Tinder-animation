@@ -2,18 +2,17 @@ import React from "react";
 import { observer, inject } from "mobx-react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+import "./user.css"
 import LayoutUser from "components/LayoutUser";
 
 import { RequestState } from "types/RequestState";
 import UserStore from "stores/UserStore";
 
-import styles from "./UserPage.module.scss";
-
 interface IProps extends RouteComponentProps {
   UserStore: typeof UserStore;
 }
 
-class UserPage extends React.Component<IProps> {
+class UserPage extends React.Component<IProps, any> {
   componentDidMount() {
     const token = sessionStorage.getItem("token");
     if (!token) return this.props.history.push("/signin");
@@ -39,20 +38,21 @@ class UserPage extends React.Component<IProps> {
 
     return (
       <LayoutUser>
-        <div className={styles["user-page"]}>
+        <div className="container">
+        <div className="centered">
           <img
             src={user.avatar_url}
             alt="vk avatar"
-            className={styles["user-page__avatar"]}
+
           />
-          <p className={styles["user-page__name"]}>{user.name}</p>
-          <p className={styles["user-page__email"]}>{user.email}</p>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
           <button
             onClick={this.handleLogout}
-            className={styles["user-page__logout"]}
           >
             Выйти
           </button>
+        </div>
         </div>
       </LayoutUser>
     );

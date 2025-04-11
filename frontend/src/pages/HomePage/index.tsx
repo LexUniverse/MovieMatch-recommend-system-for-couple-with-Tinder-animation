@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import "./home.css"
 import { useStores } from "stores/useStores";
 import { IUser } from "stores/UserStore";
 
@@ -11,8 +12,12 @@ const HomePage = observer(() => {
 
   return (
     <LayoutDefault>
+        <div className="container">
+            <div className="centered">
       <h1>Home Page</h1>
       {user && <p>О привет, {user.name}</p>}
+            </div>
+        </div>
     </LayoutDefault>
   );
 });

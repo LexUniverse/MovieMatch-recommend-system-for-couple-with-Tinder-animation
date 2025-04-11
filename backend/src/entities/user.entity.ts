@@ -1,5 +1,7 @@
 import BaseEntity from "./base.entity";
-import { Entity, Column } from "typeorm";
+import { Entity, Column, OneToMany, ManyToMany } from "typeorm";
+import { PreferenceEntity } from './preference.entity';
+import { RoomEntity } from './room.entity';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -29,4 +31,12 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   avatar_url: string;
+
+  @OneToMany(() => PreferenceEntity, preference => preference.user)
+  preferences: PreferenceEntity[];
+
+  @ManyToMany(() => RoomEntity, room => room.users)
+  rooms: RoomEntity[];
+
 }
+

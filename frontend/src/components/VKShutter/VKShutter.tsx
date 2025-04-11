@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
 
 const VKShutter: React.FC = () => {
+    // Функции для обработки успеха и ошибки
+    const vkidOnSuccess = (data: any) => {
+        console.log('Login success:', data);
+    };
+
+    const vkidOnError = (error: any) => {
+        console.error('Login error:', error);
+    };
+
     useEffect(() => {
-        // Создаем тег <script> для подключения SDK
+        // Создаем скрипт и добавляем его в DOM
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
         script.async = true;
-        document.body.appendChild(script);
 
-        // Когда скрипт загружен, инициализируем SDK
         script.onload = () => {
+            // Проверяем наличие VKIDSDK
             if ('VKIDSDK' in window) {
                 const VKID = window.VKIDSDK;
 
@@ -18,23 +26,22 @@ const VKShutter: React.FC = () => {
                     redirectUrl: 'http://localhost',
                     responseMode: VKID.ConfigResponseMode.Callback,
                     source: VKID.ConfigSource.LOWCODE,
-                    scope: '', // Заполните нужными доступами
+                    scope: '', // Заполните нужными доступами по необходимости
                 });
 
                 const floatingOneTap = new VKID.FloatingOneTap();
 
-                floatingOneTap
-                    .render({
-                        scheme: 'dark',
-                        indent: {
-                            right: 32,
-                            top: 66,
-                            bottom: 10,
-                        },
-                        appName: 'Movie Match',
-                        oauthList: ['ok_ru', 'mail_ru'],
-                        showAlternativeLogin: true,
-                    })
+                floatingOneTap.render({
+                    scheme: 'dark',
+                    indent: {
+                        right: 10,
+                        top: 40,
+                        bottom: 10,
+                    },
+                    appName: 'Movie Match',
+                    oauthList: ['ok_ru', 'mail_ru'],
+                    showAlternativeLogin: true,
+                })
                     .on(VKID.WidgetEvents.ERROR, vkidOnError)
                     .on(VKID.FloatingOneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
                         const code = payload.code;
@@ -45,29 +52,16 @@ const VKShutter: React.FC = () => {
                             .catch(vkidOnError);
                     });
             }
-
-            // Функция успешного входа
-            function vkidOnSuccess(data: any) {
-                console.log('Успешный вход:', data);
-                // Закрытие шторки после успешного входа
-                const floatingOneTap = window.VKIDSDK?.FloatingOneTap;
-                if (floatingOneTap) floatingOneTap.close();
-            }
-
-            // Функция обработки ошибок
-            function vkidOnError(error: any) {
-                console.error('Ошибка авторизации:', error);
-                // Можете обработать ошибку
-            }
         };
 
-        // Очистка скрипта при размонтировании компонента
+        document.body.appendChild(script); // Добавляем скрипт в DOM
+
         return () => {
-            document.body.removeChild(script);
+            document.body.removeChild(script); // Убираем скрипт при размонтировании компонента
         };
-    }, []); // Пустой массив зависимостей, чтобы запускался один раз
+    }, []); // Эта зависимость остается пустой, так как скрипт должен загрузиться только один раз
 
-    return <div></div>;
+    return null;
 };
 
 export default VKShutter;

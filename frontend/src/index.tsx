@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 
+import './index.css';
 import * as serviceWorker from "./serviceWorker";
 
 import App from "App";
 
 import UserStore from "stores/UserStore";
 
-import "styles/main.scss";
 
 ReactDOM.render(
   <Provider UserStore={UserStore}>

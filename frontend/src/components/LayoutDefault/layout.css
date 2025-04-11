@@ -1,0 +1,44 @@
+/* Контейнер для ссылок */
+.links-container {
+    display: flex;
+    justify-content: space-between; /* Размещаем элементы по бокам */
+    padding: 10px 20px;             /* Добавляем отступы для контейнера */
+    background-color: #f0f0f0;      /* Фон контейнера */
+    border-bottom: 2px solid #ccc;  /* Нижняя граница */
+}
+
+/* Стили для каждой ссылки */
+.link-item {
+    padding: 10px 20px;               /* Отступы внутри ссылок */
+    background-color: #007bff;        /* Синий фон */
+    color: white;                     /* Белый текст */
+    text-decoration: none;            /* Убираем подчеркивание */
+    border-radius: 4px;               /* Скругляем углы */
+    transition: background-color 0.3s; /* Плавное изменение фона */
+}
+
+/* Эффект при наведении */
+.link-item:hover {
+    background-color: #0056b3; /* Темнее синий при наведении */
+}
+
+/* Стиль для кнопки открытия шторки */
+/* Стиль для кнопки открытия шторки */
+.open-shutter-button {
+    position: fixed;
+    top: 5%; /* Располагаем кнопку на 10px от верхней границы */
+    right: 80px; /* Располагаем кнопку на 10px от правой границы */
+    width: 10%;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1000; /* Убедитесь, что кнопка всегда поверх других элементов */
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+

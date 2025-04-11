@@ -7,7 +7,6 @@ import UserStore from "stores/UserStore";
 
 import vk from "./img/VK_Blue_Logo.svg";
 
-import styles from "./VKButton.module.scss";
 
 interface IProps extends RouteComponentProps {}
 
@@ -42,12 +41,11 @@ const VKButton: React.FC<IProps> = (props) => {
   }, [props.location.search, isError, cbLink, props.history]);
 
   return (
-    <div className={styles["vk-button"]}>
-      <button className={styles["vk-button__input"]} onClick={handleRedirect}>
+    <div>
+      <button onClick={handleRedirect}>
         <img
           src={vk}
           alt="vk logo"
-          className={styles["vk-button__input-icon"]}
         />
         Войти через Вконтакте
       </button>

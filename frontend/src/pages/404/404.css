@@ -1,0 +1,24 @@
+/* Контейнер занимает всю доступную высоту и ширину */
+.container {
+    display: flex;
+    justify-content: center;  /* Центрируем по горизонтали */
+    align-items: center;      /* Центрируем по вертикали */
+    height: 100vh;            /* Занимает всю высоту окна */
+}
+
+/* Это сам элемент, который нужно центрировать */
+.centered {
+    background-color: lightblue;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+
+.btn-back {
+    padding: 10px 20px;               /* Отступы внутри ссылок */
+    background-color: #007bff;        /* Синий фон */
+    color: white;                     /* Белый текст */
+    text-decoration: none;            /* Убираем подчеркивание */
+    border-radius: 4px;               /* Скругляем углы */
+    transition: background-color 0.3s; /* Плавное изменение фона */
+}

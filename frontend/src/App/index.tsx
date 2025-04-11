@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import './App.css';
+
 
 import NotFound from "pages/404";
 import SignInPage from "pages/SignInPage";
