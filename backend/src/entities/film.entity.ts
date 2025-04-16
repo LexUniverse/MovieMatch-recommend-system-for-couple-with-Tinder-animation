@@ -10,9 +10,6 @@ export class FilmEntity extends BaseEntity {
     @Column({ nullable: true })
     year: number;
 
-    @Column({ nullable: true })
-    poster_url: string;
-
     @ManyToMany(() => GenreEntity, genre => genre.films)
     @JoinTable()
     genres: GenreEntity[];
