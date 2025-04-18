@@ -33,4 +33,9 @@ export class GenreService {
     async destroy(id: number): Promise<DeleteResult> {
         return await this.genreRepository.delete(id);
     }
+
+    async findByName(name: string): Promise<GenreEntity | null> {
+        return await this.genreRepository.findOne({ where: { name } });
+    }
+
 }

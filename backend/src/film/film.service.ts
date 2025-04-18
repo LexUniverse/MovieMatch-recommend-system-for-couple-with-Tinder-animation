@@ -53,4 +53,12 @@ export class FilmService {
     async destroy(id: number): Promise<DeleteResult> {
         return await this.filmRepository.delete(id);
     }
+
+    async findByTitle(title: string): Promise<FilmEntity | null> {
+        return await this.filmRepository.findOne({
+            where: { title },
+            relations: ['genres']
+        });
+    }
+
 }

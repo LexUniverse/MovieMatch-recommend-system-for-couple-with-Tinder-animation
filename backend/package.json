@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "",
   "scripts": {
+    "import:films": "ts-node src/scripts/import-films.ts",
     "parse": "node -r dotenv/config parser/",
     "format": "prettier --write \"**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
