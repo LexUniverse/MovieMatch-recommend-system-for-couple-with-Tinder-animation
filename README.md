@@ -25,6 +25,7 @@ $ vk-auth-react-nestjs/backend: yarn dev
 ```bash
 $ vk-auth-react-nestjs: cd frontend
 $ vk-auth-react-nestjs/frontend: yarn
+$ vk-auth-react-nestjs/frontend: $env:NODE_OPTIONS = "--openssl-legacy-provider"
 $ vk-auth-react-nestjs/frontend: yarn dev
 ```
 
