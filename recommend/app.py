@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
-
 from model_service import RecommenderService
 
 app = FastAPI(title="Recommendation Microservice")
@@ -33,18 +32,14 @@ class CombinedRecommendation(BaseModel):
     predicted_rating: float
 
 @app.post("/recommendations", response_model=List[Recommendation])
-async def get_recommendations(user_preferences: List[Preference]):
-    return service.recommend([pref.dict() for pref in user_preferences])
+async def get_recommendations(preferences: List[Preference]):
+    return service.recommend([p.dict() for p in preferences])
 
 @app.post("/recommendations/two_users", response_model=List[CombinedRecommendation])
 async def get_recommendations_two_users(
-    user1_preferences: List[Preference],
-    user2_preferences: List[Preference]
+    user1: List[Preference], user2: List[Preference]
 ):
-    recs = service.recommend_for_two_users(
-        [pref.dict() for pref in user1_preferences],
-        [pref.dict() for pref in user2_preferences],
-        min_year=2010,
-        top_k=20
+    return service.recommend_for_two_users(
+        [p.dict() for p in user1],
+        [p.dict() for p in user2]
     )
-    return recs
