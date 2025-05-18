@@ -1,2 +1,2 @@
-recommend/data/ratings.csv filter=lfs diff=lfs merge=lfs -text
 recommend/model/lightfm_rectools_model.pth filter=lfs diff=lfs merge=lfs -text
+recommend/data/ratings.csv filter=lfs diff=lfs merge=lfs -text
