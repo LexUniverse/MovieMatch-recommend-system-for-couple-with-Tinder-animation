@@ -8,13 +8,18 @@ import { ConfigService, InjectConfig } from "nestjs-config";
 import { UserEntity as User, UserEntity } from "./../entities";
 import { UserModel } from "../models";
 
+import { HttpService } from '@nestjs/axios';
+import { map } from 'rxjs/operators';
+
+
 @Injectable()
 export class UserService {
   private saltRounds: number;
 
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    @InjectConfig() private readonly config: ConfigService
+    @InjectConfig() private readonly config: ConfigService,
+    private readonly httpService: HttpService
   ) {
     this.saltRounds = config.get("app.salt_rounds", 10);
   }
@@ -85,4 +90,31 @@ export class UserService {
       }
     );
   }
+  async getRecommendations(userId: number): Promise<any> {
+    // 1. Получаем предпочтения пользователя
+    const preferences = await this.userRepository.query(`
+    SELECT "filmId", "rating" 
+    FROM preferences 
+    WHERE "userId" = $1
+  `, [userId]);
+
+    // 2. Формируем payload
+    const payload = preferences.map(pref => ({
+      film_id: pref.filmId,
+      rating: pref.rating
+    }));
+
+
+    // 4. Отправляем запрос
+    const recommendations = await this.httpService.post(
+        'http://127.0.0.1:8000/recommendations',
+        payload
+    ).pipe(
+        map(response => response.data)
+    ).toPromise();
+
+    return recommendations;
+  }
+
+
 }

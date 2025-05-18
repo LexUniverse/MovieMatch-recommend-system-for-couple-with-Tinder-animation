@@ -16,26 +16,43 @@ class UserStore {
   state = RequestState.PENDING;
 
   loginVk = (code: string) => {
+    console.log("[UserStore] loginVk called with code:", code);
     this.state = RequestState.LOADING;
 
-    return fetch(`${process.env.REACT_APP_API_HOST}/auth/login/vk`, {
+    const url = `${process.env.REACT_APP_API_HOST}/auth/login/vk`;
+    const body = { code };
+    console.log("[UserStore] POST", url, "body:", body);
+
+    return fetch(url, {
       method: "POST",
-      body: JSON.stringify({ code }),
+      body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-          case 201:
-            return res.json();
-          default:
+        .then(async (res) => {
+          console.log("[UserStore] Response status:", res.status);
+          const text = await res.text();
+          console.log("[UserStore] Raw response body:", text);
+
+          if (res.ok) {
+            const json = JSON.parse(text);
+            console.log("[UserStore] Parsed JSON:", json);
+            return json;
+          } else {
             this.setError();
-            return Promise.reject();
-        }
-      })
-      .then((user) => this.setUser(user));
+            return Promise.reject(new Error(`HTTP ${res.status}`));
+          }
+        })
+        .then((user) => {
+          console.log("[UserStore] loginVk successful, user:", user);
+          this.setUser(user);
+          return user;
+        })
+        .catch((err) => {
+          console.error("[UserStore] loginVk failed:", err);
+          throw err;
+        });
   };
 
   getProfile = () => {

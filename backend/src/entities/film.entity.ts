@@ -7,6 +7,9 @@ export class FilmEntity extends BaseEntity {
     @Column()
     title: string;
 
+    @Column()
+    russian_title: string;
+
     @Column({ nullable: true })
     year: number;
 

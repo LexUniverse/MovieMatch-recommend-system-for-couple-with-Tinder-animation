@@ -32,4 +32,9 @@ export class PreferenceController {
     destroy(@Param('id') id: number) {
         return this.preferenceService.destroy(id);
     }
+
+    @Get('user/:userId')
+    findByUserId(@Param('userId') userId: number): Promise<PreferenceEntity[]> {
+        return this.preferenceService.findByUserId(userId);
+    }
 }

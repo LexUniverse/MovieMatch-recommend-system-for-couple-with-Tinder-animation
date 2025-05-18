@@ -1,73 +1,90 @@
+// LayoutDefault.tsx
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./layout.css";
 import { useStores } from "stores/useStores";
 import { RequestState } from "types/RequestState";
-import VKShutter from "components/VKShutter/VKShutter"; // Импортируем VKShutter
+import VKShutter from "components/VKShutter/VKShutter";
+import VKButton from "../VKButton";
+import UserPreferencesModal from "../modal/userPrefs/UserPreferencesModal";
 
 const PRIVATE_ROUTES = ["/user"];
 
 const LayoutDefault: React.FC = observer((props) => {
   const { user, state, getProfile, logout } = useStores()["UserStore"];
-  let history = useHistory();
-
-  const [isShutterOpen, setIsShutterOpen] = useState(false); // Состояние для управления открытием шторки
+  const history = useHistory();
+  const [isShutterOpen, setIsShutterOpen] = useState(false);
+  const [showPreferencesModal, setShowPreferencesModal] = useState(false);
 
   React.useEffect(() => {
     const token = sessionStorage.getItem("token");
 
-    if (PRIVATE_ROUTES.includes(history.location.pathname) && !token)
-      return history.push("/signin");
+    if (PRIVATE_ROUTES.includes(history.location.pathname) && !token) {
+      history.push("/");
+      return;
+    }
 
     if (!user && state !== RequestState.LOADING && token) {
       getProfile().catch(() => {
-        history.push("/signin");
         logout();
+        history.push("/");
       });
     }
   }, [user, state, getProfile, logout, history]);
 
-  // Функция для открытия шторки
   const handleOpenShutter = () => {
-    setIsShutterOpen(false); // Сначала закрываем шторку
-    setTimeout(() => {
-      setIsShutterOpen(true); // Затем открываем заново
-    }, 100); // Немного подождем, чтобы гарантировать перерисовку
+    setIsShutterOpen(true);
+  };
+
+  const handleCloseShutter = () => {
+    setIsShutterOpen(false);
   };
 
   return (
       <div>
         <div className="links-container">
-          <Link to="/" className="link-item">
-            Главная
-          </Link>
+          <a className="name" href="#top">
+            MovieMatch
+          </a>
           {user ? (
-              <Link to="/user" className="link-item">
+              <div className="link-item" onClick={handleOpenShutter}>
                 Мой профиль
-              </Link>
-          ) : (
-              <Link to="/signin" className="link-item">
-                Войти
-              </Link>
-          )}
-        </div>
-
-        <div className="content-container">
-          {props.children}
-
-          {/* Кнопка для открытия шторки */}
-          <div className="open-shutter-button" onClick={handleOpenShutter}>
-            Открыть шторку
-          </div>
-
-          {/* Шторка с компонентом VKShutter */}
-          {isShutterOpen && (
-              <div className="shutter-container">
-                <VKShutter />
               </div>
+          ) : (
+              <VKButton />
           )}
         </div>
+
+        {props.children}
+
+
+        {user && (
+            <>
+              <VKShutter
+                  isOpen={isShutterOpen}
+                  onClose={handleCloseShutter}
+                  user={user}
+                  onLogout={() => {
+                    logout();
+                    setIsShutterOpen(false);
+                    history.push("/");
+                  }}
+                  onOpenPreferences={() => {
+                    setShowPreferencesModal(true);
+                    setIsShutterOpen(false);
+                  }}
+              />
+
+              {showPreferencesModal && (
+                  <UserPreferencesModal
+                      userId={user.id}
+                      onClose={() => setShowPreferencesModal(false)}
+                  />
+              )}
+            </>
+        )}
+
       </div>
   );
 });

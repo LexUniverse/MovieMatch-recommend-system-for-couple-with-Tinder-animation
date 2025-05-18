@@ -24,8 +24,13 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+.csv
+
 # nyc test coverage
 .nyc_output
+
+recommend/model/lightfm_rectools_model.pth
+recommend/data/ratings.csv
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt

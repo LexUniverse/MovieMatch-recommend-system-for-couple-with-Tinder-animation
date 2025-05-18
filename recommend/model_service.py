@@ -3,12 +3,14 @@ import pandas as pd
 import json
 from rectools.models import load_model
 import os
+import random
 
 class RecommenderService:
     def __init__(self, model_path: str, movies_csv: str, mappings_dir: str):
         # Загружаем модель и эмбеддинги
         wrapper = load_model(model_path)
         self.item_embeddings = wrapper.model.item_embeddings
+        self.popular_movies = pd.read_csv('data/popular_movies.csv').head(5000)
 
         # Загружаем маппинги (ключи и значения — ints)
         with open(os.path.join(mappings_dir, "idmap_ext2int.json"), "r") as f:
@@ -128,3 +130,39 @@ class RecommenderService:
             if len(recs) >= top_k:
                 break
         return recs
+
+
+    def get_random_popular(
+            self,
+            top_n: int = 20,
+            min_year: int = 2000,
+            watched: list[dict] = None
+        ) -> list[dict]:
+            if watched is None:
+                watched = []
+
+            watched_ids = {film['film_id'] for film in watched}
+            # Фильтрация по году и просмотренным
+            filtered = self.popular_movies[
+                (self.popular_movies['year'] >= min_year) &
+                (~self.popular_movies['movieId'].isin(watched_ids))
+            ]
+
+            if filtered.empty:
+                return []
+
+            # Случайная выборка (без random_state — каждый раз разные)
+            sampled = filtered.sample(n=min(top_n, len(filtered)))
+
+            result = []
+            for _, row in sampled.iterrows():
+                result.append({
+                    'film_id': int(row['movieId']),
+                    'title_en': row['title'],
+                    'title_ru': row['russian_title'],
+                    'genres': row['genres'],
+                    'year': int(row['year']),
+                    'predicted_rating': 0  # не персонализированная выдача
+                })
+
+            return result

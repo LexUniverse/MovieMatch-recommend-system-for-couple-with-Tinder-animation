@@ -32,4 +32,9 @@ export class RoomController {
     destroy(@Param('id') id: number) {
         return this.roomService.destroy(id);
     }
+
+    @Get(':id/recommendations')
+    async getRecommendations(@Param('id') roomId: number): Promise<any> {
+        return this.roomService.getRecommendationsForTwoUsers(roomId);
+    }
 }

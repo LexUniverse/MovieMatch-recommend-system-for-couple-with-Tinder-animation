@@ -1,0 +1,39 @@
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* тёмный полупрозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #1e1e2f; /* тёмный синий/фиолетовый фон */
+    padding: 20px 30px;
+    border-radius: 12px;
+    color: #eee;
+    width: 400px;
+    max-width: 90vw;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal button {
+    background-color: #3a3a5c;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button:hover:not(:disabled) {
+    background-color: #5c5c8f;
+}
+
+.modal button:disabled {
+    background-color: #555;
+    cursor: default;
+}

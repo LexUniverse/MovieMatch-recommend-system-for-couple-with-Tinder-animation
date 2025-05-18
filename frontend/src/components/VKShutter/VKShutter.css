@@ -1,0 +1,76 @@
+.shutter-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shutter-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.shutter-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.shutter-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shutter-button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4a76a8;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.shutter-button:hover {
+    background-color: #3b5f89;
+}
+
+
+.shutter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.shutter-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.shutter-panel {
+    position: fixed;
+    top: 3%;
+    right: 5%;
+    height: auto;
+    width: 300px;
+    background: #2f3440;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Когда открыто */
+.shutter-overlay.open .shutter-panel {
+    transform: translateY(0);
+    opacity: 1;
+}

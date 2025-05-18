@@ -77,4 +77,12 @@ export class UserController {
 
     return await this.userService.update(userEntity, user);
   }
+
+  @Get(':id/recommendations')
+  async getRecommendations(
+      @Param('id') userId: number
+  ): Promise<any> {
+    return this.userService.getRecommendations(userId);
+  }
+
 }

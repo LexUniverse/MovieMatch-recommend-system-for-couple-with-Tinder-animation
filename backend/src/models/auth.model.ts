@@ -11,3 +11,8 @@ export class AuthModel {
 export class AuthVK {
   code: string;
 }
+
+export class AuthVK2 {
+  code: string;
+  device_id: string;
+}

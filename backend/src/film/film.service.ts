@@ -21,6 +21,7 @@ export class FilmService {
         const film = this.filmRepository.create({
             title: filmModel.title,
             year: filmModel.year,
+            russian_title: filmModel.russian_title,
             genres
         });
 
@@ -31,6 +32,7 @@ export class FilmService {
         const genres = await this.genreRepository.findByIds(filmModel.genreIds || []);
         return await this.filmRepository.save({
             ...filmEntity,
+            russian_title: filmModel.russian_title,
             title: filmModel.title,
             year: filmModel.year,
             genres

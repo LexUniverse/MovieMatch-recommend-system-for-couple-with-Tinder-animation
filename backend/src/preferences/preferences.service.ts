@@ -56,4 +56,12 @@ export class PreferenceService {
     async destroy(id: number): Promise<DeleteResult> {
         return await this.preferenceRepository.delete(id);
     }
+    async findByUserId(userId: number): Promise<PreferenceEntity[]> {
+        return await this.preferenceRepository.find({
+            where: {
+                user: { id: userId }
+            },
+            relations: ['user', 'film'],
+        });
+    }
 }

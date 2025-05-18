@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException, HttpService } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-
+import * as VKID from '@vkid/sdk';
 import { UserService } from "./../user";
 import { UserEntity } from "../entities";
 import { JwtPayloadInterface } from "./interfaces";
@@ -55,16 +55,32 @@ export class AuthService {
     };
 
     const host =
-      process.env.NODE_ENV === "prod"
-        ? process.env.APP_HOST
-        : process.env.APP_LOCAL;
+        process.env.NODE_ENV === "prod"
+            ? process.env.APP_HOST
+            : process.env.APP_LOCAL;
 
-    return this.http
-      .get(
-        `https://oauth.vk.com/access_token?client_id=${VKDATA.client_id}&client_secret=${VKDATA.client_secret}&redirect_uri=${host}/signin&code=${code}`
-      )
-      .toPromise();
+    const url = `https://oauth.vk.com/access_token?client_id=${VKDATA.client_id}&client_secret=${VKDATA.client_secret}&redirect_uri=${host}&code=${code}`;
+
+    console.log("[AuthService] getVkToken - Request URL:", url);
+
+    try {
+      const response = await this.http.get(url).toPromise();
+
+      console.log("[AuthService] getVkToken - Response status:", response.status);
+      console.log("[AuthService] getVkToken - Response data:", response.data);
+
+      return response;
+    } catch (error) {
+      if (error.response) {
+        console.error("[AuthService] getVkToken - Error response status:", error.response.status);
+        console.error("[AuthService] getVkToken - Error response data:", error.response.data);
+      } else {
+        console.error("[AuthService] getVkToken - Error:", error.message);
+      }
+      throw error;
+    }
   }
+
 
   async getUserDataFromVk(userId: string, token: string): Promise<any> {
     return this.http

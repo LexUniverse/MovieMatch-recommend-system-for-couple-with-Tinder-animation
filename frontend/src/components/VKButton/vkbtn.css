@@ -1,0 +1,14 @@
+.vk-button {
+    all: unset;
+    position: fixed;
+    top: 25px;
+    right: 8%;
+    width: 10%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,0);
+    margin-top: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: calc(2vw/1.7);
+}

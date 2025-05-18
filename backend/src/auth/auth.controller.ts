@@ -5,7 +5,7 @@ import {
   ValidationPipe,
   UnprocessableEntityException,
 } from "@nestjs/common";
-import { AuthModel, UserModel, AuthVK, IGrant, UserDTO } from "./../models";
+import { AuthModel, UserModel, AuthVK, IGrant, UserDTO, AuthVK2} from "./../models";
 import { AuthService } from "./auth.service";
 import { UserService } from "./../user";
 

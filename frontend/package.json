@@ -2,23 +2,26 @@
   "name": "vk-auth-react",
   "version": "0.0.1",
   "private": true,
-  "author": "Andrew Boev",
+  "author": "Alex Shrestha",
   "dependencies": {
     "@types/node": "^14.0.27",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@vkid/sdk": "^2.5.2",
+    "axios": "^0.27.2",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-toastify": "^6.2.0",
+    "socket.io-client": "^4.8.1",
     "typescript": "~3.9.7"
   },
   "scripts": {
-    "dev": "cross-env REACT_APP_API_HOST=http://localhost:8888 react-scripts start",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_HOST=http://localhost:8888 react-scripts start",
     "build": "cross-env REACT_APP_MODE=production react-scripts build",
     "prod": "cross-env REACT_APP_MODE=production react-scripts start",
     "test": "react-scripts test",
@@ -40,10 +43,13 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
+    "postcss": "^8.5.3",
     "prettier": "2.0.5",
     "serve": "^11.3.2",
+    "tailwindcss": "^4.1.6",
     "typed-css-modules": "^0.6.4",
     "typescript-plugin-css-modules": "^2.4.0"
   }

@@ -4,6 +4,9 @@ export class FilmModel {
     @IsString()
     title: string;
 
+    @IsString()
+    russian_title: string;
+
     @IsNumber()
     @IsOptional()
     year?: number;
@@ -15,6 +18,7 @@ export class FilmModel {
 
 export class FilmDTO {
     id: number;
+    russian_title: string;
     title: string;
     year: number;
     genres: { id: number; name: string }[];

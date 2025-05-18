@@ -1,67 +1,42 @@
-import React, { useEffect } from 'react';
+// VKShutter.tsx
+import React from "react";
+import "./VKShutter.css";
 
-const VKShutter: React.FC = () => {
-    // Функции для обработки успеха и ошибки
-    const vkidOnSuccess = (data: any) => {
-        console.log('Login success:', data);
+interface Props {
+    isOpen: boolean;
+    onClose: () => void;
+    user: {
+        avatar_url: string;
+        name: string;
     };
+    onLogout: () => void;
+    onOpenPreferences: () => void; // 👈 Новый пропс
+}
 
-    const vkidOnError = (error: any) => {
-        console.error('Login error:', error);
-    };
+const VKShutter: React.FC<Props> = ({ isOpen, onClose, user, onLogout, onOpenPreferences  }) => {
+    return (
+        <div
+            className={`shutter-overlay ${isOpen ? "open" : ""}`}
+            onClick={onClose}
+        >
+            <div className="shutter-panel" onClick={(e) => e.stopPropagation()}>
+                <div className="shutter-header">
+                    <img src={user.avatar_url} alt="avatar" className="shutter-avatar" />
+                    <span className="shutter-name">{user.name}</span>
+                </div>
+                <div className="shutter-actions">
+                    <button className="shutter-button"   onClick={() => {
+                        onOpenPreferences();
+                        onClose(); // чтобы закрыть шторку при открытии модального окна (если нужно)
+                    }}>Мои предпочтения</button>
 
-    useEffect(() => {
-        // Создаем скрипт и добавляем его в DOM
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
-        script.async = true;
-
-        script.onload = () => {
-            // Проверяем наличие VKIDSDK
-            if ('VKIDSDK' in window) {
-                const VKID = window.VKIDSDK;
-
-                VKID.Config.init({
-                    app: 52854807,
-                    redirectUrl: 'http://localhost',
-                    responseMode: VKID.ConfigResponseMode.Callback,
-                    source: VKID.ConfigSource.LOWCODE,
-                    scope: '', // Заполните нужными доступами по необходимости
-                });
-
-                const floatingOneTap = new VKID.FloatingOneTap();
-
-                floatingOneTap.render({
-                    scheme: 'dark',
-                    indent: {
-                        right: 10,
-                        top: 40,
-                        bottom: 10,
-                    },
-                    appName: 'Movie Match',
-                    oauthList: ['ok_ru', 'mail_ru'],
-                    showAlternativeLogin: true,
-                })
-                    .on(VKID.WidgetEvents.ERROR, vkidOnError)
-                    .on(VKID.FloatingOneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-                        const code = payload.code;
-                        const deviceId = payload.device_id;
-
-                        VKID.Auth.exchangeCode(code, deviceId)
-                            .then(vkidOnSuccess)
-                            .catch(vkidOnError);
-                    });
-            }
-        };
-
-        document.body.appendChild(script); // Добавляем скрипт в DOM
-
-        return () => {
-            document.body.removeChild(script); // Убираем скрипт при размонтировании компонента
-        };
-    }, []); // Эта зависимость остается пустой, так как скрипт должен загрузиться только один раз
-
-    return null;
+                    <button className="shutter-button" onClick={onLogout}>
+                        Выйти
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default VKShutter;
