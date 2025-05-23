@@ -131,8 +131,8 @@ const HomePage = observer(() => {
             </div>
 
             <div id="hiw" className="how-it-works">
-                Как работает
-                <div className="hiw-btn-wrapper">
+                <div className="section-title">Как работает</div>
+                    <div className="hiw-btn-wrapper">
                     <div className="hiw-btn">
                         <div className={"hiw-btn-inside"}>
                             <div className={"div1"}>
@@ -186,15 +186,15 @@ const HomePage = observer(() => {
                 </div>
             )}
 
-            <div id="room" className="how-it-works">
-                Выберите фильм
-                <div className="hiw-btn-wrapper">
-                    <div className="hiw-btn" onClick={createRoom}>
-                        <div className="room-action-btn">Создать комнату</div>
+            <div id="room" className="room-section">
+                <div className="section-title"> Выберите фильм </div>
+                <div className="room-btn-wrapper">
+                    <div className="room-btn" onClick={createRoom}>
+                        Создать комнату
                     </div>
 
-                    <div className="hiw-btn" onClick={() => setShowJoinRoomModal(true)}>
-                        <div className="room-action-btn">Присоединиться</div>
+                    <div className="room-btn" onClick={() => setShowJoinRoomModal(true)}>
+                        Присоединиться
                     </div>
                 </div>
 

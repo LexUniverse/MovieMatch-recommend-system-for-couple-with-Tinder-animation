@@ -15,8 +15,10 @@
     color: #eee;
     width: 400px;
     max-width: 90vw;
+    max-height: 90vh;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 10vw;
 }
 
 .modal button {

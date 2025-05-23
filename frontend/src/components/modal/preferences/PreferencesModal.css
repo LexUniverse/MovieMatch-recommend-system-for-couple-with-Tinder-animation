@@ -11,14 +11,19 @@
     z-index: 9999;
 }
 
+.recomend-title{
+    font-size: 18px;
+}
+
 .modal-content {
     background: #1c1e26;
     padding: 30px;
     border-radius: 12px;
-    width: 400px;
+    width: 500px;
     text-align: center;
     color: white;
     position: relative;
+    margin: 10vw;
 }
 
 .modal-poster {

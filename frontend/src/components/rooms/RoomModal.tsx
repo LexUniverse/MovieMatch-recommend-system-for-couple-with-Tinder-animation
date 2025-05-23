@@ -104,26 +104,13 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, currentUserId, onClose, onR
         <div className="modal-overlay">
             <div className="modal"
                  style={{background: "#1c1c1c", color: "#fff", borderRadius: 12, padding: 20, maxWidth: 400}}>
-
-                <h2 style={{marginTop: 0}}> {roomState.name}</h2>
-                <h3>Код: {roomState.id}</h3>
-
-                {currentUserInfo && (
-                    <div style={{display: "flex", alignItems: "center", marginBottom: 20}}>
-                        <img
-                            src={currentUserInfo.avatar_url || "https://via.placeholder.com/32"}
-                            alt={currentUserInfo.name}
-                            style={{width: 40, height: 40, borderRadius: "50%", marginRight: 12}}
-                        />
-                        <span>Вы: <strong>{currentUserInfo.name}</strong></span>
-                    </div>
-                )}
+                <div style={{margin: "10px"}}>Код: {roomState.id}</div>
 
                 {!ready &&
                     <button onClick={handleReady} style={{padding: "8px 16px", cursor: "pointer"}}>Я готов</button>}
 
                 {ready && currentFilm && (
-                    <div style={{textAlign: "center", marginTop: 20}}>
+                    <div style={{textAlign: "center"}}>
                         <h3>{currentFilm.title_ru || currentFilm.title}</h3>
                         <img
                             src={`http://localhost:5000/get_movie_poster/${currentFilm.film_id}`}

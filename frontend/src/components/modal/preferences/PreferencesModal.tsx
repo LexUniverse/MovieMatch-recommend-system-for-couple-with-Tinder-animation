@@ -63,7 +63,7 @@ const PreferencesModal = ({ userId, onClose }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>{currentMovie.title_ru}</h2>
+                <h2 className={"recomend-title"}>{currentMovie.title_ru}</h2>
                 <img
                     src={`http://localhost:5000/get_movie_poster/${currentMovie.film_id}`}
                     alt={currentMovie.title_ru}
