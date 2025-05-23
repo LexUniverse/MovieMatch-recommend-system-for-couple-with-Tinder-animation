@@ -27,7 +27,7 @@ const VKShutter: React.FC<Props> = ({ isOpen, onClose, user, onLogout, onOpenPre
                 <div className="shutter-actions">
                     <button className="shutter-button"   onClick={() => {
                         onOpenPreferences();
-                        onClose(); // чтобы закрыть шторку при открытии модального окна (если нужно)
+                        onClose();
                     }}>Мои предпочтения</button>
 
                     <button className="shutter-button" onClick={onLogout}>

@@ -21,13 +21,13 @@ const VKButton: React.FC<IProps> = (props) => {
   const cbLink = `${host}`;
 
   const handleRedirect = () => {
-    console.log("[VKButton] Redirecting to VK OAuth with redirect_uri:", cbLink);
+    //console.log("[VKButton] Redirecting to VK OAuth with redirect_uri:", cbLink);
     window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=popup&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
   };
 
   React.useEffect(() => {
     const handleLogin = (code: string) => {
-      console.log("VKButton code:", code); // ← лог
+      //console.log("VKButton code:", code); // ← лог
 
       UserStore.loginVk(code)
         .then(() => {

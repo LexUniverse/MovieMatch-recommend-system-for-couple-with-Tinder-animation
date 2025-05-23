@@ -105,7 +105,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, currentUserId, onClose, onR
             <div className="modal"
                  style={{background: "#1c1c1c", color: "#fff", borderRadius: 12, padding: 20, maxWidth: 400}}>
 
-                <h2 style={{marginTop: 0}}>Комната {roomState.name}</h2>
+                <h2 style={{marginTop: 0}}> {roomState.name}</h2>
                 <h3>Код: {roomState.id}</h3>
 
                 {currentUserInfo && (
@@ -179,7 +179,7 @@ const RoomModal: React.FC<RoomModalProps> = ({ room, currentUserId, onClose, onR
                                     fontStyle: "italic",
                                     color: u.ready ? "limegreen" : "gray"
                                 }}>
-                                    {u.ready ? "Готов" : "Ожидает"} {u.choice !== null ? "(Проголосовал)" : ""}
+                                    {u.ready ? "Готов" : "Ожидает"}
                                 </span>
                             </li>
                         ))}
