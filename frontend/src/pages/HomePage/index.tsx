@@ -21,6 +21,7 @@ const HomePage = observer(() => {
     const [activeRoom, setActiveRoom] = useState<any | null>(null);
     const [showJoinRoomModal, setShowJoinRoomModal] = useState(false);
     const [joinRoomId, setJoinRoomId] = useState("");
+    const [posterLoading, setPosterLoading] = useState(true);
 
     useEffect(() => {
         if (user?.id) {
@@ -131,7 +132,7 @@ const HomePage = observer(() => {
             </div>
 
             <div id="hiw" className="how-it-works">
-                Как работает
+                <div className={"section-title"}>Как работает</div>
                 <div className="hiw-btn-wrapper">
                     <div className="hiw-btn">
                         <div className={"hiw-btn-inside"}>
@@ -174,9 +175,11 @@ const HomePage = observer(() => {
                     <div className="recommendation-scroll">
                         {recommendations.map((rec) => (
                             <div key={rec.film_id} className="recommendation-item">
+                                {posterLoading && <div className="spinner"></div>}
                                 <img
                                     src={`http://localhost:5000/get_movie_poster/${rec.film_id}`}
                                     alt={rec.title_ru}
+                                    onLoad={() => setPosterLoading(false)}
                                 />
                                 <div className="recommendation-title">{rec.title_ru}</div>
                                 <div className="recommendation-year">{rec.year}</div>
@@ -186,15 +189,15 @@ const HomePage = observer(() => {
                 </div>
             )}
 
-            <div id="room" className="how-it-works">
-                Выберите фильм
-                <div className="hiw-btn-wrapper">
-                    <div className="hiw-btn" onClick={createRoom}>
-                        <div className="room-action-btn">Создать комнату</div>
+            <div id="room" className="room-section">
+                <div className={"section-title"}>Выберите фильм</div>
+                    <div className="room-btn-wrapper">
+                    <div className="room-btn" onClick={createRoom}>
+                        Создать комнату
                     </div>
 
-                    <div className="hiw-btn" onClick={() => setShowJoinRoomModal(true)}>
-                        <div className="room-action-btn">Присоединиться</div>
+                    <div className="room-btn" onClick={() => setShowJoinRoomModal(true)}>
+                        Присоединиться
                     </div>
                 </div>
 
@@ -210,7 +213,7 @@ const HomePage = observer(() => {
 
             {showJoinRoomModal && (
                 <div className="overlay">
-                    <div className="modal">
+                    <div className="modal-come">
                         <h2>Войти в комнату</h2>
                         <input
                             type="text"

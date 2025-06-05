@@ -59,7 +59,7 @@ export class AuthService {
             ? process.env.APP_HOST
             : process.env.APP_LOCAL;
 
-    const url = `https://oauth.vk.com/access_token?client_id=${VKDATA.client_id}&client_secret=${VKDATA.client_secret}&redirect_uri=${host}&code=${code}`;
+    const url = `https://oauth.vk.com/access_token?client_id=${VKDATA.client_id}&client_secret=${VKDATA.client_secret}&redirect_uri=${host}&code=${code}&scope=email`;
 
     console.log("[AuthService] getVkToken - Request URL:", url);
 

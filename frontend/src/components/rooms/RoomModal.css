@@ -1,39 +1,338 @@
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.7); /* тёмный полупрозрачный фон */
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.modal {
-    background: #1e1e2f; /* тёмный синий/фиолетовый фон */
-    padding: 20px 30px;
-    border-radius: 12px;
-    color: #eee;
-    width: 400px;
-    max-width: 90vw;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.room-code{
+    margin-bottom: 5px;
 }
 
-.modal button {
-    background-color: #3a3a5c;
+.modal {
+    background: #1c1c1c;
+    border-radius: 12px;
+    margin: 20px auto;
+    max-width: 800px;
+    width: 400px;
+    padding: 20px 70px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    font-size: 18px;
+
+    /* Мобильная и десктопная адаптация */
+    height: 65vh;
+}
+
+.spinner {
+    margin: 20px auto;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Ограничение по высоте только на больших экранах */
+@media (min-width: 768px) {
+    .modal {
+        max-height: 80vh;
+    }
+}
+
+.film-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.film-poster {
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    user-select: none;
+}
+
+.film-year {
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+h2 {
+    margin: 0 0 8px 0;
+    text-align: center;
+}
+
+.swipe-hint {
+    font-size: 14px;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.vote-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+@media (max-width: 767px) {
+    .vote-buttons {
+        display: none;
+    }
+    .modal{
+        height: 93vh;
+    }
+}
+
+@media (min-width: 768px) {
+    .vote-buttons {
+        display: flex;
+    }
+}
+
+.like-button,
+.dislike-button {
+    background-color: #4caf50;
     border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
     color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
     cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s ease;
 }
 
-.modal button:hover:not(:disabled) {
-    background-color: #5c5c8f;
+.dislike-button {
+    background-color: #f44336;
 }
 
-.modal button:disabled {
-    background-color: #555;
+.like-button:disabled,
+.dislike-button:disabled {
     cursor: default;
+    opacity: 0.5;
+}
+
+.film-mobile .film-poster {
+    max-height: 70vh;
+}
+
+.selected-film h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: normal;
+    color: #ccc;
+}
+
+.selected-film .film-poster-selected {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    user-select: none;
+
+
+}
+
+.match-text {
+    color: #4caf50; /* зелёный */
+    font-weight: bold;
+    font-size: 24px;
+    position: relative;
+    animation: glow 1s ease-in-out infinite alternate, pop 0.5s ease-out;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50, 0 0 30px #4caf50;
+    }
+    to {
+        text-shadow: 0 0 20px #81c784, 0 0 30px #81c784, 0 0 40px #81c784;
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.green-splash {
+    position: relative;
+    width: 100%;
+    height: 150px; /* подстрой под нужный размер */
+    pointer-events: none;
+    overflow: visible;
+}
+
+.green-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: pulseDot 2.5s infinite ease-in-out;
+    will-change: transform, opacity;
+}
+
+/* Расставим точки вручную */
+.green-dot.dot1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+.green-dot.dot2 {
+    top: 40%;
+    left: 35%;
+    animation-delay: 0.5s;
+}
+.green-dot.dot3 {
+    top: 60%;
+    left: 55%;
+    animation-delay: 1s;
+}
+.green-dot.dot4 {
+    top: 30%;
+    left: 75%;
+    animation-delay: 1.5s;
+}
+.green-dot.dot5 {
+    top: 50%;
+    left: 85%;
+    animation-delay: 2s;
+}
+
+@keyframes pulseDot {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.6);
+        opacity: 0.4;
+    }
+}
+
+.swipe-hint {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    user-select: none;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+
+/* Центрирование ожидания */
+.waiting-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.waiting-text {
+    font-size: 18px;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.users-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-item {
+    background: gray;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.user-item.ready {
+    background: green;
+}
+
+.user-avatar {
+    border-radius: 50%;
+}
+
+.ready-button {
+    background-color: #00aaff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    max-width: 400px;
+}
+
+.selected-film {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Центрирует по вертикали */
+    text-align: center;
 }

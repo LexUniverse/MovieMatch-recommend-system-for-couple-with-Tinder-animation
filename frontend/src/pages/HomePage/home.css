@@ -98,7 +98,7 @@ body {
     margin-top: 35px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 16dvmin;
+    grid-column-gap: 4dvmin;
 }
 
 .hiw-btn {
@@ -214,7 +214,7 @@ body {
     object-fit: contain;
 }
 
-/* Переиспользуем how-it-works */
+/* Переиспользуем r-works */
 .recommendation-section {
     background-color: #14171C;
 }
@@ -230,27 +230,43 @@ body {
     transition: transform 0.3s ease;
 }
 
-.room-action-btn {
+.room-section{
+    background-color: #14171C;
+    margin: 60px 8%;
+    font-size: 1.5vw;
+    color: white;
+}
+
+.room-btn-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px; /* расстояние между кнопками */
+    padding: 16px 0;
+    width: 100%;
+}
+
+.room-btn {
     background-color: #2F3440;
     color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 18px;
+    font-size: 18px;
     font-weight: bold;
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 200px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Занимает всю ширину своей колонки */
+    box-sizing: border-box;
 }
 
-.room-action-btn:hover {
+.room-btn:hover {
     background-color: #2F3440;
     transform: scale(1.05);
 }
 
-.room-action-btn:active {
+.room-btn:active {
     background-color: #2F3440;
     transform: scale(0.98);
 }
@@ -266,17 +282,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.modal {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .modal h2 {
@@ -320,4 +325,127 @@ body {
 
 .modal-buttons button:hover {
     opacity: 0.9;
+}
+
+.modal-come {
+    background: #1c1c1c;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-come h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.modal-come input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+
+/* Адаптация под экраны до 768px */
+@media (max-width: 768px) {
+    .name {
+        font-size: 6vw;
+        margin-left: 4%;
+    }
+
+    .link-item {
+        font-size: 14px;
+        margin-right: 4%;
+    }
+
+    .open-shutter-button,
+
+    .vk-button {
+        right: 4%;
+        font-size: 18px;
+    }
+
+
+    .modal-content,
+    .modal,
+    .upm-modal {
+        width: 90vw !important;
+        padding: 16px;
+    }
+
+    .modal-actions button,
+    .rating-buttons button {
+        padding: 6px 10px;
+        font-size: 4vw;
+    }
+
+    .upm-preference-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .room-action-btn {
+        width: 90%;
+        font-size: 4vw;
+    }
+
+    .shutter-panel {
+        width: 90vw;
+        right: 5%;
+    }
+
+    .recommendation-item {
+        width: 40vw;
+    }
+
+    .recommendation-item img {
+        width: 40vw;
+        height: auto;
+    }
+
+    .main-img-text,
+    .small-img-text,
+    .main-btn {
+        text-align: right;
+        font-size: 4.5vw;
+    }
+
+    .hiw-btn-wrapper {
+        grid-template-columns: 1fr;
+        grid-row-gap: 24px;
+    }
+
+    .section-title {
+        font-size: 6vw;
+    }
+
+    .hiw-icon {
+        max-width: 80px;
+    }
+
+    .div2{
+     font-size: 22px;
+    }
+
+    .hiw-btn-inside {
+        height: 30vw;
+    }
+
+    .room-btn-wrapper {
+        grid-template-columns: 1fr;
+        grid-row-gap: 24px;
+    }
+
+    .shutter-panel {
+        width: 80vw;
+
+    }
 }
