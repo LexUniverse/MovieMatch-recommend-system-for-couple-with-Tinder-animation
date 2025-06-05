@@ -1,12 +1,17 @@
-# Авторизация через ВК NestJS + React
+# Веб-сервис для подбора фильмов на основе совместных предпочтений
 
-Пример реализованной авторизации по способу Authorization code flow на примере NestJS + React.
 
 # Установка
 
 ```
 git clone https://github.com/LexUniverse/testRepos/tree/show
 cd vk-auth-react-nestjs
+```
+
+## Запуск черезе MakeFile
+
+```bash
+$ vk-auth-react-nestjs: make
 ```
 
 ## Backend
