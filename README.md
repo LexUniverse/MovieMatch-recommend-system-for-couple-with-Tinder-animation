@@ -7,6 +7,7 @@
 git clone https://github.com/LexUniverse/testRepos/tree/show
 cd vk-auth-react-nestjs
 ```
+#Запуск
 
 ## Запуск черезе MakeFile
 
