@@ -2,12 +2,10 @@
 
 Пример реализованной авторизации по способу Authorization code flow на примере NestJS + React.
 
-[Статья](https://medium.com/@ndrwbv/%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-%D0%B2%D0%BA-nestjs-react-797ff4e36154)
-
 # Установка
 
 ```
-git clone git@github.com:ndrwbv/vk-auth-react-nestjs.git
+git clone https://github.com/LexUniverse/testRepos/tree/show
 cd vk-auth-react-nestjs
 ```
 
@@ -25,15 +23,37 @@ $ vk-auth-react-nestjs/backend: yarn dev
 ```bash
 $ vk-auth-react-nestjs: cd frontend
 $ vk-auth-react-nestjs/frontend: yarn
-$ vk-auth-react-nestjs/frontend: $env:NODE_OPTIONS = "--openssl-legacy-provider"
 $ vk-auth-react-nestjs/frontend: yarn dev
+```
+
+
+## roomRTservice
+
+```bash
+$ vk-auth-react-nestjs: cd roomRTservice
+$ vk-auth-react-nestjs/roomRTservice: yarn
+$ vk-auth-react-nestjs/roomRTservice: yarn start
+```
+
+## recommend
+
+```bash
+$ vk-auth-react-nestjs: cd recommend
+$ vk-auth-react-nestjs/recommend: uvicorn app:app --reload
+```
+
+## poster_service
+
+```bash
+$ vk-auth-react-nestjs: cd poster_service
+$ vk-auth-react-nestjs/poster_service: python image_proxy.py
 ```
 
 # Настройка
 
-Для работы с вашим приложением необходимо:
+Для работы необходимо:
 
-1. Создать приложение во Вконтакте https://vk.com/editapp?act=create
+1. Создать приложение во Вконтакте
 2. Отредактировать файлы .env в папке frontend и backend
 
 ```bash
