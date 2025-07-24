@@ -1,3 +1,4 @@
+# Актуальный проект в ветке show
 # Авторизация через ВК NestJS + React
 
 Пример реализованной авторизации по способу Authorization code flow на примере NestJS + React.
